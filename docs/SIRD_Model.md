@@ -3,7 +3,7 @@
 
 
 **<p style="text-align: center;">
-![SIRD Equations](images/SIRD_model_equations)
+![SIRD Equations](images/SIRD_model_equations.jpg)
 </p>**
 
 
