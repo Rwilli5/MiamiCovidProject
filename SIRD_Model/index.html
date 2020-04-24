@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>SIRD Details - The Miami-Dade COVID Project</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SIRD Details";
+    var mkdocs_page_input_path = "SIRD_Model.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> The Miami-Dade COVID Project</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../report/">Reports</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../faq/">FAQ</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about_us/">About</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">SIRD Details</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#import-the-libraries">Import the Libraries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#severity-parameters">Severity Parameters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#detection">Detection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sir-transition-rates">SIR Transition Rates</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-model">The Model</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#model-output">Model Output</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ihme_chime_details/">IHME and CHIME Details</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">The Miami-Dade COVID Project</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>SIRD Details</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Rwilli5/MiamiCovidProject/edit/master/docs/SIRD_Model.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sird-model">SIRD Model</h1>
+<p><strong><p style="text-align: center;">
+<img alt="SIRD Equations" src="../images/SIRD_model_equations.jpg" />
+</p></strong></p>
+<h2 id="import-the-libraries">Import the Libraries</h2>
+<pre><code class="python">#Import the libraries
+from functools import reduce
+from typing import Tuple, Dict, Any
+import pandas as pd
+import streamlit as st
+import numpy as np
+import altair as alt
+import matplotlib.pyplot as plt
+from math import floor
+from ggplot import *
+</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<pre><code class="python">#Hospital Parameters
+
+# Miami Dade County Population
+S_default = 2761581.0
+
+# Hospital Market Share
+Penn_market_share = 1.0
+
+# Currently Hospitalised Patients (at current hospital?)
+known_cases = 636.0
+current_hosp = known_cases
+
+# Currently Hospitalised Patients
+known_infections = 1000.0
+initial_infections = known_infections
+
+# Doubling Time
+doubling_time = 6.0
+
+# Social Distancing (% reduction in social contact)
+relative_contact_rate = 0.0
+</code></pre>
+
+<h2 id="severity-parameters">Severity Parameters</h2>
+<pre><code class="python">#Severity Parameters
+
+# Hospitalisation (% of total infections)
+hosp_rate = 0.05
+
+# ICU (% of total infections)
+icu_rate = 0.02
+
+# Ventilated (% of total infections)
+vent_rate = 0.01
+
+# Infectious Days
+recovery_days = 14.0
+
+# Average hospital length of stay (days)
+hosp_los = 7.0
+
+# Average ICU length of stay (days)
+icu_los = 9.0
+
+# Average length of stay on a ventilator (days)
+vent_los = 10.0
+</code></pre>
+
+<h2 id="detection">Detection</h2>
+<pre><code class="python"># Total Infections without accounting for undetected
+total_infections = current_hosp / Penn_market_share / hosp_rate
+print(total_infections)
+
+#Detection probabiltiy
+detection_prob = initial_infections / total_infections
+print(detection_prob)
+
+#Accounting for Detection
+Infct = initial_infections / detection_prob
+Susc, Infct, Recov = S_default - Infct, Infct, 0.0
+
+total_dead= 354
+print(total_dead)
+
+
+</code></pre>
+
+<pre><code>12720.0
+0.07861635220125786
+354
+</code></pre>
+<pre><code class="python">#Estimate of Total Infected Accounting for Detection Probability
+print(Infct)
+
+#Estimate of Total Infected minus deaths
+Infct2 = Infct- total_dead
+print (Infct2)
+
+</code></pre>
+
+<pre><code>12720.0
+12366.0
+</code></pre>
+<pre><code class="python">#Estmate of Total Succeptible
+print(Susc)
+
+#adjust for deaths
+Susc2= Susc- total_dead
+print(Susc2)
+</code></pre>
+
+<pre><code>2748861.0
+2748507.0
+</code></pre>
+<pre><code class="python"># Intrinsic Growth
+intrinsic_growth_rate = 2 ** (1 / doubling_time) - 1
+print(intrinsic_growth_rate)
+</code></pre>
+
+<pre><code>0.12246204830937302
+</code></pre>
+<h2 id="sir-transition-rates">SIR Transition Rates</h2>
+<pre><code class="python">#SIR Transition Rates
+type(Recov)
+print(Recov)
+
+#Gamma = Recovery Rate
+gamma = 1.0 / recovery_days
+#mean recovery rate, gamma, (in 1/days).
+print(gamma)
+
+
+#Beta = Infection Rate
+beta = (intrinsic_growth_rate + gamma) / Susc * (1.0 - relative_contact_rate)
+# Contact rate, beta
+# {rate based on doubling time} / {initial Susc}
+print(beta)
+
+#Mu = Death Rate 
+total_deaths = 63
+mu= total_deaths / Infct
+print(mu)
+</code></pre>
+
+<pre><code>0.0
+0.07142857142857142
+7.05348941754219e-08
+0.004952830188679245
+</code></pre>
+<pre><code class="python"># Reproduction Number
+r_t = beta / gamma * Susc 
+# Current Reproduction Number
+# r_t is r_0 after distancing
+print(r_t)
+
+#Reproductive Number Accounting for Contact
+r_naught = r_t / (1.0 - relative_contact_rate)
+# Initial Reproduction Number
+print(r_naught)
+</code></pre>
+
+<pre><code>2.7144686763312222
+2.7144686763312222
+</code></pre>
+<pre><code class="python"># Doubling Time
+doubling_time_t = 1.0 / np.log2(beta * Susc - gamma + 1.0) 
+# Current Doubling Time
+# doubling time after distancing
+print(doubling_time_t)
+
+# type(Recov)
+</code></pre>
+
+<pre><code>5.999999999999998
+</code></pre>
+<h2 id="the-model">The Model</h2>
+<pre><code class="python">#Running the Model
+#Initializing Vars
+S = 2748861.0
+I = 12720.0
+R = 0
+D = 354
+steps = 100
+#Disease Parameters
+beta = 7.05348941754219e-08
+gamma = 0.07142857142857142
+mu = 0.004952830188679245
+history = pd.DataFrame({&quot;S&quot;: S, &quot;I&quot;: I, &quot;R&quot;: R, &quot;D&quot;: D}, index=[0])
+#Run sim loop
+history[&quot;step&quot;] = history.index
+plotData = pd.melt(history, id_vars=[&quot;step&quot;])
+ggplot(plotData, aes(x=&quot;step&quot;, y=&quot;value&quot;, color=&quot;variable&quot;))+geom_line()
+for step in range(1, steps):
+    newInf = floor(min(max(beta*I*S, 0), S))
+    newRec = floor(min(max(gamma*I, 0), I))
+    newDead = floor(min(max(mu*I, 0), I-newRec))
+    S = S - newInf
+    I = I + newInf - newRec - newDead
+    R = R + newRec
+    D = D + newDead
+    history = history.append(pd.DataFrame({&quot;S&quot;: S, &quot;I&quot;: I, &quot;R&quot;: R, &quot;D&quot;: D}, index=[step]))
+history[&quot;step&quot;] = history.index
+#Plot using Python port of ggplot
+plotData = pd.melt(history, id_vars=[&quot;step&quot;], value_vars=[&quot;S&quot;,&quot;I&quot;,&quot;R&quot;,&quot;D&quot;])
+ggplot(plotData, aes(x=&quot;step&quot;, y=&quot;value&quot;, color=&quot;variable&quot;))+geom_line()+xlab(&quot;Time Step&quot;)+ylab(&quot;# Hosts&quot;)
+</code></pre>
+
+<h2 id="model-output">Model Output</h2>
+<p><img alt="png" src="../images/output_10_0.png" /></p>
+<pre><code class="python">
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ihme_chime_details/" class="btn btn-neutral float-right" title="IHME and CHIME Details">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../about_us/" class="btn btn-neutral" title="About"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Rwilli5/MiamiCovidProject/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../about_us/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ihme_chime_details/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
