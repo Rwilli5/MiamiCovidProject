@@ -1,0 +1,11 @@
+site_name: The Miami-Dade COVID Project
+nav: 
+    - Home: index.md
+    - Reports: report.md
+    - FAQ: faq.md
+    - About: about_us.md
+    - SIRD Details: SIRD_Model.md
+    - IHME and CHIME Details: ihme_chime_details.md
+repo_url: https://github.com/gabrielodom/southFL_covid19_website
+
+theme: readthedocs
