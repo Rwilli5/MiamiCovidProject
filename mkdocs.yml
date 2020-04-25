@@ -6,6 +6,6 @@ nav:
     - About: about_us.md
     - SIRD Details: SIRD_Model.md
     - IHME and CHIME Details: ihme_chime_details.md
-repo_url: https://github.com/tibbben/MiamiCovidProject
+repo_url: https://github.com/Rwilli5/MiamiCovidProject
 
 theme: readthedocs
