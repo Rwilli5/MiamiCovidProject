@@ -1,7 +1,7 @@
 ---
 title: "README"
 author: "Roy Williams and Gabriel Odom"
-date: "04/15/2020"
+date: "2020-04-15"
 output: html_document
 ---
 
