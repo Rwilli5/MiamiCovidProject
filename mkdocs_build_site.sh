@@ -5,6 +5,9 @@ conda deactivate
 # Point to python environment here
 conda activate env_sflCHIME
 
+#Roy's conda environment 
+conda activate RTutorial
+
 # In the project working directory
 mkdocs serve
 # This builds the site locally at http://127.0.0.1:8000/
