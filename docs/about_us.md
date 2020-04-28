@@ -8,8 +8,8 @@
 We are an interdisciplinary team of public health scientists representing Florida International University in partnership with Baptist Health South Florida and the University of Miami.
 
 
-## Roy Williams
-MPH-Biostatistics, 2020, Florida International University.
+## Roy Williams, MPH
+Associate Instructor, Miami-Dade College.
 
 ## Gabriel Odom, PhD, ThD
 Assistant Professor, Department of Biostatistics, Robert Stempel College of Public Health and Social Work, Florida International University.
