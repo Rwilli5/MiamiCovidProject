@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # This is the terminal setup to build an mkdocs website
 
 conda deactivate
