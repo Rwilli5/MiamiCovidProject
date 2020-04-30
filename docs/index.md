@@ -13,7 +13,7 @@ Residents in South Florida are familiar with hurricane forecasts and know that s
 
 Because there is still *much uncertainty about many aspects of COVID-19 infection including its spread from person to person, its natural history, and how well people are adhering to social distancing, these simplified models of the effects of COVID-19 need to be considered only as possible scenarios. Furthermore, they are much less likely to be accurate in the long-term.*
 
-To see today's Model Predctions visit [The Model Report](https://rwilli5.github.io/git/report/)
+To see today's Model Predctions visit [The Model Report](https://rwilli5.github.io/git/report/).
 
 ## Models
 
