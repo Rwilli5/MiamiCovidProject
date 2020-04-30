@@ -1,4 +1,4 @@
-# MDC Covid-19 Projections
+# MDC COVID-19 Projections
 
 **<p style="text-align: center;">
 ![join.jpg](images/join.jpg)
