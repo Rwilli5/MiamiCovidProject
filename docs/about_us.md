@@ -16,7 +16,7 @@ Assistant Professor, Department of Biostatistics, Robert Stempel College of Publ
 <https://stempel.fiu.edu/faculty/gabriel-j-odom/>
 
 ## Zoran Bursac, PhD
-Professor and Chair, Department of Biostatistics, Director of the Center for Statistical Consulting and Collaboration (FIU-STATCONSULT), Robert Stempel College of Public Health and Social Work, Florida International University.
+Professor and Chair, Department of Biostatistics; Director, Center for Statistical Consulting and Collaboration (FIU-STATCONSULT); Robert Stempel College of Public Health and Social Work, Florida International University.
 <https://stempel.fiu.edu/faculty/01-zoran-bursac/>
 
 ## Mary Jo Trepka, MD, MSPH
@@ -24,7 +24,7 @@ Professor and Chair, Department of Epidemiology, Robert Stempel College of Publi
 <https://stempel.fiu.edu/faculty/trepka-mary-jo/>
 
 ## Emir Veledar, PhD
-Director of Predictive Analytics and Biostatistics, Baptist Health South Florida; Courtesy Professor, Department of Biostatistics, Florida International University.
+Director, Predictive Analytics and Biostatistics, Baptist Health South Florida; Courtesy Professor, Department of Biostatistics, Florida International University.
 <https://stempel.fiu.edu/faculty/veledar-emir/>
 
 ## Anshul Saxena, BDS, PhD
@@ -32,7 +32,7 @@ Biostatistician, Baptist Health South Florida; Courtesy Assistant Professor, Dep
 <https://works.bepress.com/anshul-saxena/>
  
 ## Louis T. Gidel, MD, PhD
-Chief Medical Informatics and Quality Officer, Baptist Health South Florida
+Pulmonary and Critical Care Medicine; Medical Director, Center for Advanced Analytics; Chief, Medical Informatics and Quality; Baptist Health South Florida
 
 ## Timothy B. Norris, PhD
 Librarian Associate Professor of Data Science, University of Miami Libraries and Institute for Data Science and Computing, University of Miami.
