@@ -4,7 +4,7 @@
 ![join.jpg](images/join.jpg)
 </p>**
 
-This website was created to inform researchers, scientists, policy makers, and the general public regarding the projected impact of Covid-19 on Miami-Dade County. We will be providing daily updates and projections for each model.
+This website was created to inform researchers, scientists, policy makers, and the general public regarding the projected impact of COVID-19 on Miami-Dade County. We will be providing daily updates and projections for each model.
 
 ## Disclaimer on Models
 **What you need to know about epidemiologic models**: Models use mathematics and information we have on COVID-19 to project what might happen in the future. All existing models of COVID-19 infection and outcomes are simplified versions of what happens in actual epidemics. Furthermore, models are dependent on the quality of the data that goes into them (for example, the percentage of people who are infected who will eventually need to be hospitalized and put on a ventilator). *Because of these limitations, models can give us ideas about what may happen. They cannot tell us exactly what will happen and when it will happen.*
