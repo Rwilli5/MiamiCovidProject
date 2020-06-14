@@ -1,12 +1,14 @@
 site_name: The Miami-Dade COVID Project
 nav: 
     - Home: index.md
-    - Reports: report.md
+    #- Reports: report.md
     - FAQ: faq.md
     - About: about_us.md
-    - SIRD Details: SIRD_Model.md
+    - Miami-Dade County COVID-19 Trajectory: test.md
+    #- SIRD Details: SIRD_Model.md
     - IHME and CHIME Details: ihme_chime_details.md
-    - Test: test.md
+    
 repo_url: https://github.com/Rwilli5/MiamiCovidProject
 
 theme: readthedocs
+
